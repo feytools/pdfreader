@@ -15,7 +15,10 @@ export default defineConfig({
     emptyOutDir: true,
     sourcemap: true,
     rollupOptions: {
-      external: ["react", "pdfjs-dist", "pdfjs-dist/build/pdf.worker.entry"]
+      external: [
+        "react",
+        "pdfjs-dist",
+      ]
     },
   },
   plugins: [react()],

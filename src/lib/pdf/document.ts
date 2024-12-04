@@ -50,6 +50,9 @@ export const usePDFDocumentContext = ({ fileURL }: usePDFDocumentParams) => {
         setReady(true);
       },
       (error) => {
+        // @NOTE
+        // - https://github.com/wojtekmaj/react-pdf/discussions/1212
+        if (loadingTask.destroyed) return;
         // eslint-disable-next-line no-console
         console.error("Error loading PDF document", error);
       },

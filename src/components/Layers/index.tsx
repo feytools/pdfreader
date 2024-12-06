@@ -32,12 +32,14 @@ export const TextLayer = ({
 
 export const AnnotationLayer = ({
   renderForms = true,
+  annotations,
   className,
   style,
   ...props
 }: AnnotationLayerParams & HTMLProps<HTMLDivElement>) => {
   const { annotationLayerRef } = useAnnotationLayer({
     renderForms,
+    annotations,
   });
 
   return (

@@ -16,6 +16,7 @@
   "scripts": {
     "test": "test-storybook",
     "build": "vite build && tsc --emitDeclarationOnly --declaration && tsc-alias",
+    "prepare": "npm run build",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "test:browser": "vitest --workspace=vitest.workspace.ts"

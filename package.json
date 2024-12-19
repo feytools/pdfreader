@@ -16,6 +16,7 @@
   "scripts": {
     "test": "test-storybook",
     "build": "vite build && tsc --emitDeclarationOnly --declaration && tsc-alias",
+    "prepare": "npm run build",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "test:browser": "vitest --workspace=vitest.workspace.ts"
@@ -42,7 +43,6 @@
     "@vitest/browser": "^2.0.4",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-simple-import-sort": "^12.1.1",
-    "pdfjs-dist": "^4.4.168",
     "playwright": "^1.45.3",
     "prettier": "^3.3.2",
     "react": "^18.3.1",

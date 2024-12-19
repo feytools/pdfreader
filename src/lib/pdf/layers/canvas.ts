@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { useDPR, useViewport, useVisibility } from "@/lib/viewport";
 
 import { usePDFPage } from "../page";
+import { AnnotationMode } from "pdfjs-dist";
 
 export const useCanvasLayer = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -35,6 +36,9 @@ export const useCanvasLayer = () => {
     canvasContext.scale(scale, scale);
 
     const renderingTask = pdfPageProxy.render({
+      // @TODO
+      // - Could pass this through at the Context level (Root) as prop
+      annotationMode: AnnotationMode.DISABLE,
       canvasContext: canvasContext,
       viewport,
     });

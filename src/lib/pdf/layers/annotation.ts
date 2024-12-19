@@ -8,15 +8,13 @@ import { usePDFPage } from "../page";
 import { cancellable } from "../utils";
 
 export interface AnnotationLayerParams {
-  /**
-   * Whether to render forms.
-   */
   renderForms?: boolean;
+  annotations?: any[];
 }
 
 const defaultAnnotationLayerParams = {
   renderForms: true,
-} satisfies Required<AnnotationLayerParams>;
+};
 
 export const useAnnotationLayer = (params: AnnotationLayerParams) => {
   const annotationLayerRef = useRef<HTMLDivElement>(null);
@@ -66,7 +64,7 @@ export const useAnnotationLayer = (params: AnnotationLayerParams) => {
           ...annotationLayerConfig,
           ...defaultAnnotationLayerParams,
           ...params,
-          annotations: await pdfPageProxy.getAnnotations(),
+          annotations: params.annotations ?? await pdfPageProxy.getAnnotations(),
           // @ts-expect-error TODO: Fix this
           linkService,
         });

@@ -1,11 +1,8 @@
 import {
   getDocument,
-  GlobalWorkerOptions,
   OnProgressParameters,
   PDFDocumentProxy,
 } from "pdfjs-dist";
-// @ts-expect-error Vite Worker
-import PDFWorker from "pdfjs-dist/build/pdf.worker.min.mjs?url&inline";
 import { RefProxy } from "pdfjs-dist/types/src/display/api";
 import {
   createContext,
@@ -15,12 +12,6 @@ import {
   useRef,
   useState,
 } from "react";
-
-/**
- * General setup for pdf.js
- */
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
-GlobalWorkerOptions.workerSrc = PDFWorker;
 
 /**
  * Load a document
@@ -59,6 +50,9 @@ export const usePDFDocumentContext = ({ fileURL }: usePDFDocumentParams) => {
         setReady(true);
       },
       (error) => {
+        // @NOTE
+        // - https://github.com/wojtekmaj/react-pdf/discussions/1212
+        if (loadingTask.destroyed) return;
         // eslint-disable-next-line no-console
         console.error("Error loading PDF document", error);
       },

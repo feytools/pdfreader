@@ -1,7 +1,7 @@
 import { useDebounce } from "@uidotdev/usehooks";
 import { useEffect, useRef } from "react";
 
-import { useDPR, useViewport, useVisibility } from "@/lib/viewport";
+import { useDPR, useViewport } from "@/lib/viewport";
 
 import { usePDFPage } from "../page";
 import { AnnotationMode } from "pdfjs-dist";
@@ -10,10 +10,8 @@ export const useCanvasLayer = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { pdfPageProxy } = usePDFPage();
   const dpr = useDPR();
-  const { visible } = useVisibility({ elementRef: canvasRef });
   const { zoom: bouncyZoom } = useViewport();
   const zoom = useDebounce(bouncyZoom, 100);
-  const debouncedVisible = useDebounce(visible, 100);
 
   useEffect(() => {
     if (!canvasRef.current) {
@@ -24,7 +22,7 @@ export const useCanvasLayer = () => {
 
     const canvas = canvasRef.current;
 
-    const scale = debouncedVisible ? dpr * zoom : 0.5;
+    const scale = dpr * zoom;
 
     canvas.height = viewport.height * scale;
     canvas.width = viewport.width * scale;
@@ -55,7 +53,7 @@ export const useCanvasLayer = () => {
     return () => {
       void renderingTask.cancel();
     };
-  }, [pdfPageProxy, canvasRef.current, dpr, debouncedVisible, zoom]);
+  }, [pdfPageProxy, canvasRef.current, dpr, zoom]);
 
   return {
     canvasRef,

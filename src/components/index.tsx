@@ -1,5 +1,5 @@
 import "pdfjs-dist/web/pdf_viewer.css";
-import { Viewport } from "./Viewport";
+import { Viewport, ViewportProvider } from "./Viewport";
 import { useViewport } from "@/lib/viewport";
 import { Root } from "./Root";
 import { Page } from "./Page";
@@ -66,6 +66,7 @@ export {
   useViewport,
   // Components
   Viewport,
+  ViewportProvider,
   Root,
   Page,
   AnnotationLayer,

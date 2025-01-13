@@ -1,6 +1,15 @@
-import { useViewportContainer } from "@/lib/viewport";
-import { HTMLProps, useRef } from "react";
 import { Primitive } from "../Primitive";
+import { type HTMLProps, type ReactNode, useRef } from "react";
+import { useViewportContainer, useViewportContext, ViewportContext } from "@/lib/viewport";
+
+export const ViewportProvider = ({ children }: { children: ReactNode }) => {
+  const viewportContext = useViewportContext({});
+  return (
+    <ViewportContext.Provider value={viewportContext}>
+      {children}
+    </ViewportContext.Provider>
+  )
+}
 
 export const Viewport = ({ children, ...props }: HTMLProps<HTMLDivElement>) => {
   const containerRef = useRef<HTMLDivElement>(null);

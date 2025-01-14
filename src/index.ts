@@ -1,11 +1,6 @@
 // @NOTE
-// - Required for custom `AnnotationLayer`
-export { usePDFPage } from "@/lib/pdf/page";
-export { useVisibility } from "@/lib/viewport";
-export { usePDFLinkService } from "@/lib/pdf/links";
-
-// @NOTE
 // - Required for `Viewer`
+export { useViewport } from "@/lib/viewport";
 export { usePDFDocument } from "@/lib/pdf/document";
 
 // @NOTE

@@ -1,17 +1,20 @@
 import { useDebounce } from "@uidotdev/usehooks";
 import { useEffect, useRef } from "react";
 
-import { useDPR, useViewport } from "@/lib/viewport";
+import { useDPR } from "@/lib/viewport";
 
 import { usePDFPage } from "../page";
 import { AnnotationMode } from "pdfjs-dist";
 
-export const useCanvasLayer = () => {
+type UseCanvasLayerParams = {
+  zoom: number;
+}
+
+export const useCanvasLayer = ({ zoom: scale }: UseCanvasLayerParams) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { pdfPageProxy } = usePDFPage();
   const dpr = useDPR();
-  const { zoom: bouncyZoom } = useViewport();
-  const zoom = useDebounce(bouncyZoom, 100);
+  const zoom = useDebounce(scale, 100);
 
   useEffect(() => {
     if (!canvasRef.current) {

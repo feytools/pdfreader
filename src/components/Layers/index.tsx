@@ -8,6 +8,10 @@ import { usePDFPage } from "@/lib/pdf/page";
 import clsx from "clsx";
 import { HTMLProps } from "react";
 
+type CanvasLayerProps = HTMLProps<HTMLCanvasElement> & {
+  zoom?: number;
+}
+
 export const TextLayer = ({
   className,
   style,
@@ -58,10 +62,11 @@ export const AnnotationLayer = ({
 };
 
 export const CanvasLayer = ({
+  zoom = 1,
   style,
   ...props
-}: HTMLProps<HTMLCanvasElement>) => {
-  const { canvasRef } = useCanvasLayer();
+}: CanvasLayerProps) => {
+  const { canvasRef } = useCanvasLayer({ zoom });
 
   return (
     <canvas
